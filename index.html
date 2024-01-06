@@ -9,28 +9,87 @@
 </head>
 <body>
     <div class="d-flex flex-column">
-        <header class="container-fluid bg-dark d-flex flex-md-row flex-column align-items-center justify-content-between pt-10 py-5 gap-5">
-            <div class="d-flex flex-md-row"> 
-                <img src="img/logo200px.jpg" class="rounded mx-5 col-md-3">    
-                <div class="d-flex text-white flex-column gap-3">
+
+        <header class="container-fluid bg-dark d-flex flex-md-row flex-column justify-content-between pt-10 py-5 gap-5">
+            <div class="d-flex flex-md-row flex-column gap-5"> 
+                <img src="img/logo-1 copy.jpg" class="rounded mx-5 col-md-2 col-6 mx-auto">    
+                <div class="d-flex text-white flex-column pt-3 mx-auto">
                     <h1>Московские Истории</h1>
                     <p>Экскурсии по Москве</p>
                 </div>
             </div> 
-            <button class="btn btn-secondary btn-lg text-white mx-5">Личный кабинет</button>
+            <div class="d-flex flex-md-row justify-content-center">
+                <button class="btn btn-lg text-white">Личный кабинет</button>
+                <button class="btn btn-lg text-white mx-3">маршруты</button>
+            </div>
         </header>
-        <div class="container-fluid d-flex justify-content-around flex-lg-row flex-column align-items-center py-5 gap-5">
+
+        <section class="container-fluid d-flex justify-content-around flex-lg-row flex-column align-items-center py-5 gap-5">
             <img src="img/moscow.jpg" class="img-fluid col-lg-6 mx-5">
             <div class="d-flex flex-column gap-3 mx-5">
                 <h2>О компании</h2>
                 <p>Добро пожаловать в "Московские Истории" – ваш проводник в удивительный мир столицы России! Мы являемся ведущей компанией по организации экскурсий по Москве, предлагая уникальные и захватывающие маршруты, которые погружают вас в богатую историю, культуру и архитектуру этого удивительного города.</p>
-
                 <p>Наши профессиональные гиды – настоящие энтузиасты, обладающие глубокими знаниями и страстью к Москве. Они не просто расскажут вам факты, но и поделятся увлекательными историями, которые придают каждой экскурсии уникальный характер.</p>
             </div>
-        </div>
+        </section>
+
+        <div class="container-fluid bg-secondary my-5 border border-4 border-secondary"></div>
+        
+        <section class="mt-0" id="routs">
+            <div class="display-2 text-center">Маршруты</div>
+            <div class="container-lg">
+              <div class="row justify-content-between mt-3">
+                <div class="col-5 col-md-3">
+                  <input type="text" class="form-control mx-auto" placeholder="Поиск..." id="routsSearch">
+                </div>
+                <div class="col-5 col-md-3">
+                  <select class="form-select" aria-label="Default select example" id="routsSelect">
+                    <option selected>Выбрать</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <table class="table container-xxl text-center align-middle mt-3 table-striped-columns">
+              <thead>
+                <tr>
+                  <th scope="col">Название</th>
+                  <th scope="col">Описание</th>
+                  <th scope="col">Основные объекты</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody class="" id="tableRouts">
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+              </ul>
+            </nav>
+        </section>
+        
+        <section class="tourGuide">
+            <div class="display-2 text-center">Гиды по маршруту</div>
+            <table class="table container-xxl text-center align-middle mt-3 table-striped-columns">
+              <thead>
+                <tr>
+                  <th scope="col">ФИО</th>
+                  <th scope="col">Языки</th>
+                  <th scope="col">Опыт работы</th>
+                  <th scope="col">Стоимость в час</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody id="tableTourGuides">
+              </tbody>
+            </table>
+        </section>
+        
         <footer class="bg-dark d-flex text-white">
                 <a class="mx-5 py-2 text-white text-decoration-none">&copy; Ахмадов С. А.</a>
         </footer>
     </div>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
