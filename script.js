@@ -142,6 +142,7 @@
 
     document.getElementById("routsSelect").addEventListener("change", function (e) {
         let selectedValue = e.target.value;
+        document.getElementById("routsSearch").value = '';
       if (selectedValue != 'Не выбрано') {
         const filteredData = routsData.filter(item => item.mainObject.includes(selectedValue));
         currentPage = 1;
