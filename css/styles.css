@@ -52,3 +52,8 @@
 .main-img {
     border-radius: 10px;
 }
+
+td img {
+    height: 50px;
+    width: 50px;
+}

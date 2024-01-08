@@ -4,6 +4,7 @@
     const apiUrl = 'http://exam-2023-1-api.std-900.ist.mospolytech.ru/api/routes';
     const urlWithApiKey = `${apiUrl}?api_key=${apiKey}`;
     let routsData;
+    let guidesData;
     let selectedRouteId;
 
     let currentPage = 1;
@@ -37,6 +38,7 @@
       paginatedData.forEach(guide => {
         const row = document.createElement('tr');
         row.innerHTML = `
+          <td><img src="img/avatar.png" class="avatar-img"></td>
           <td>${guide.name}</td>
           <td>${guide.language}</td>
           <td>${guide.workExperience}</td>
@@ -129,31 +131,41 @@
     }
 
     document.getElementById("routsSearch").addEventListener("keyup", function (e) {
-        if (e.key === "Enter") {
-          let searchText = e.target.value.toLowerCase();
-          const filteredData = routsData.filter(item => item.name.toLowerCase().includes(searchText));
-          currentPage = 1;
-          tableBody.innerHTML = '';
-          displayList(filteredData, currentPage, rowsPerPage);
-          displayPagination(filteredData, rowsPerPage);
-          highlightActivePage();
-        }
+      let searchText = e.target.value.toLowerCase();
+      if ( document.getElementById("routsSelect").value === 'Не выбрано') {
+        const filteredData = routsData.filter(item => item.name.toLowerCase().includes(searchText));
+        currentPage = 1;
+        tableBody.innerHTML = '';
+        displayList(filteredData, currentPage, rowsPerPage);
+        displayPagination(filteredData, rowsPerPage);
+        highlightActivePage();
+      } else {
+        const selectedFilteredData = routsData.filter(item => item.mainObject.includes(document.getElementById("routsSelect").value));
+        const filteredData = selectedFilteredData.filter(item => item.name.toLowerCase().includes(searchText));
+        currentPage = 1;
+        tableBody.innerHTML = '';
+        displayList(filteredData, currentPage, rowsPerPage);
+        displayPagination(filteredData, rowsPerPage);
+        highlightActivePage();
+      }
       });
 
     document.getElementById("routsSelect").addEventListener("change", function (e) {
         let selectedValue = e.target.value;
-        document.getElementById("routsSearch").value = '';
+        const filteredSearchData = routsData.filter(item => item.name.toLowerCase().includes(document.getElementById("routsSearch").value.toLowerCase()));
       if (selectedValue != 'Не выбрано') {
-        const filteredData = routsData.filter(item => item.mainObject.includes(selectedValue));
+        const filteredData = filteredSearchData.filter(item => item.mainObject.includes(selectedValue));
         currentPage = 1;
         tableBody.innerHTML = '';
         displayList(filteredData, currentPage, rowsPerPage);
         displayPagination(filteredData, rowsPerPage);
       } else {
+        currentPage = 1;
         tableBody.innerHTML = '';
-        displayList(routsData, currentPage, rowsPerPage);
-        displayPagination(routsData, rowsPerPage);
+        displayList(filteredSearchData, currentPage, rowsPerPage);
+        displayPagination(filteredSearchData, rowsPerPage);
       }
+
     });
 
     function selectedRoute(routeId, routeName) {
@@ -164,12 +176,21 @@
       loadGuides(routeId);
       selectedRouteId = routeId;
 
-      const searchInput = document.getElementById("routsSearch");
-      let searchText = searchInput.value.toLowerCase();
-      const filteredData = routsData.filter(item => item.name.toLowerCase().includes(searchText));
-      tableBody.innerHTML = '';
-      displayList(filteredData, currentPage, rowsPerPage);
-      highlightActivePage();
+      let searchText = document.getElementById("routsSearch").value.toLowerCase();
+      if ( document.getElementById("routsSelect").value === 'Не выбрано') {
+        const filteredData = routsData.filter(item => item.name.toLowerCase().includes(searchText));
+        tableBody.innerHTML = '';
+        displayList(filteredData, currentPage, rowsPerPage);
+        displayPagination(filteredData, rowsPerPage);
+        highlightActivePage();
+      } else {
+        const selectedFilteredData = routsData.filter(item => item.mainObject.includes(document.getElementById("routsSelect").value));
+        const filteredData = selectedFilteredData.filter(item => item.name.toLowerCase().includes(searchText));
+        tableBody.innerHTML = '';
+        displayList(filteredData, currentPage, rowsPerPage);
+        displayPagination(filteredData, rowsPerPage);
+        highlightActivePage();
+      }
     }
 
     loadRouts();
