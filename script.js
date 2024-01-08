@@ -161,11 +161,14 @@
       label.textContent = "Гиды по маршруту " + routeName;
       tourGuideTable.classList.remove('d-none');
       loadGuides(routeId);
-
-      tableBody.innerHTML = '';
       selectedRouteId = routeId;
-      displayList(routsData, currentPage, rowsPerPage);
-      loadRouts();
+
+      const searchInput = document.getElementById("routsSearch");
+      let searchText = searchInput.value.toLowerCase();
+      const filteredData = routsData.filter(item => item.name.toLowerCase().includes(searchText));
+      tableBody.innerHTML = '';
+      displayList(filteredData, currentPage, rowsPerPage);
+      highlightActivePage();
     }
 
     loadRouts();
