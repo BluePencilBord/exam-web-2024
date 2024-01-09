@@ -21,6 +21,7 @@
         displaySelect(routsData);
     }
 
+    //отображение списка гидов
     async function loadGuides(routeId) {
       const response = await fetch(`http://exam-2023-1-api.std-900.ist.mospolytech.ru/api/routes/${routeId}/guides?api_key=${apiKey}`);
       guidesData = await response.json();
@@ -30,6 +31,7 @@
       displayGuidesList(guidesData, 1, 99999);
     }
 
+    //отображение списка гидов
     function displayGuidesList(data, page, rowsPerPage) {
       const start = (page - 1) * rowsPerPage;
       const end = start + rowsPerPage;
@@ -48,6 +50,7 @@
       });
     }
 
+    //отображение списка маршрутов
     function displayList(data, page, rowsPerPage) {
       const start = (page - 1) * rowsPerPage;
       const end = start + rowsPerPage;
@@ -69,6 +72,7 @@
       });
     }
 
+    //отображение списка селектов
     function displaySelect(dataArr) {
       const selectEl = document.getElementById("routsSelect");
       let uniqueValues = [];
@@ -92,6 +96,7 @@
       });
     }
 
+    //отображение пагинации
     function displayPagination(data, rowsPerPage) {
       const paginationEl = document.querySelector('.pagination');
       paginationEl.innerHTML = '';
@@ -103,6 +108,7 @@
       }
     }
 
+    //функция воздания кнопки пагинации
     function createPaginationBtn(page, data, rowsPerPage) {
       const liEl = document.createElement('li');
       liEl.classList.add('page-item');
@@ -123,6 +129,7 @@
       return liEl;
     }
 
+    //подсветка активной страницы пагинации
     function highlightActivePage() {
       const paginationItems = document.querySelectorAll('.pagination .page-item');
       paginationItems.forEach(item => item.classList.remove('active'));
@@ -130,6 +137,7 @@
       activePaginationItem.classList.add('active');
     }
 
+    //функционал поисковика
     document.getElementById("routsSearch").addEventListener("keyup", function (e) {
       let searchText = e.target.value.toLowerCase();
       if ( document.getElementById("routsSelect").value === 'Не выбрано') {
@@ -150,6 +158,7 @@
       }
       });
 
+    //функционал селекта
     document.getElementById("routsSelect").addEventListener("change", function (e) {
         let selectedValue = e.target.value;
         const filteredSearchData = routsData.filter(item => item.name.toLowerCase().includes(document.getElementById("routsSearch").value.toLowerCase()));
@@ -168,6 +177,7 @@
 
     });
 
+    //функция вызывающаяся при нажатии на кнопку "выбрать" возле маршрута
     function selectedRoute(routeId, routeName) {
       const tourGuideTable = document.querySelector('.tourGuide');
       const label = document.getElementById("guidesLabel");
@@ -193,4 +203,5 @@
       }
     }
 
+    //подгрузка маршрутов
     loadRouts();
