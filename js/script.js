@@ -32,8 +32,10 @@ function displayGuidesList(data, page, rowsPerPage) {
 //отображение списка гидов
 async function loadGuides(routeId) {
     try {
-        const response = await fetch(`http://exam-2023-1-api.std-900.ist.
-        mospolytech.ru/api/routes/${routeId}/guides?api_key=${apiKey}`);
+        const response = await fetch(
+            'http://exam-2023-1-api.std-900.ist.mospolytech.ru/api/routes/' +
+          `${routeId}/guides?api_key=${apiKey}`
+        );
         guidesData = await response.json();
         guidesTableBody.innerHTML = '';
         displayGuidesList(guidesData, 1, 99999);
