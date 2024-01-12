@@ -41,6 +41,15 @@ async function loadGuides(routeId) {
         displayGuidesList(guidesData, 1, 99999);
     } catch (error) {
         console.error('Произошла ошибка при загрузке данных гидов:', error);
+        const alertContainer = document.getElementById("alert-container");
+        const divEl = document.createElement('div');
+        divEl.classList.add('alert');
+        divEl.classList.add('alert-danger');
+        divEl.textContent = 'Произошла ошибка при загрузке данных гидов';
+        setTimeout(function() {
+            divEl.remove();
+        }, 10000);
+        alertContainer.appendChild(divEl);
     }
 }
 
@@ -229,6 +238,15 @@ async function loadRouts() {
         displaySelect(routsData);
     } catch (error) {
         console.error('Произошла ошибка при загрузке данных маршрутов:', error);
+        const alertContainer = document.getElementById("alert-container");
+        const divEl = document.createElement('div');
+        divEl.classList.add('alert');
+        divEl.classList.add('alert-danger');
+        divEl.textContent = 'Произошла ошибка при загрузке данных маршрутов';
+        setTimeout(function() {
+            divEl.remove();
+        }, 10000);
+        alertContainer.appendChild(divEl);
     }
 }
 
